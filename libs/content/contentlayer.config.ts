@@ -2,7 +2,7 @@ import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 
 export const Resume = defineDocumentType(() => ({
   name: 'Resume',
-  filePathPattern: `**/*.mdx`,
+  filePathPattern: `**/resumeTPO.mdx`,
   contentType: 'mdx',
   isSingleton: true,
   fields: {

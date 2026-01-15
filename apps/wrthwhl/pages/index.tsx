@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Container,
   Title,
@@ -8,6 +9,7 @@ import {
   Divider,
   ActionIcon,
   Button,
+  List,
 } from '@mantine/core';
 import {
   IconSchool,
@@ -88,6 +90,7 @@ const Golden = ({
 };
 
 const mdxComponents = {
+  Avatar,
   Section: ({ children, mx, my }) => (
     <Box
       sx={(t) => ({
@@ -99,14 +102,17 @@ const mdxComponents = {
   ),
   Title,
   Text,
-  TimelineItem: ({ children, title, org, startYear, endYear }) => (
+  TimelineItem: ({ children, title, org, startYear, endYear, sx }) => (
     <Box
-      sx={(t) => ({
-        display: 'flex',
-        flexDirection: 'row',
-        margin: `${t.other.fib(1, 'em')} ${t.other.fib(1, 'em')}`,
-        breakInside: 'avoid',
-      })}
+      sx={[
+        (t) => ({
+          display: 'flex',
+          flexDirection: 'row',
+          margin: `${t.other.fib(1, 'em')} ${t.other.fib(1, 'em')}`,
+          breakInside: 'avoid',
+        }),
+        sx,
+      ]}
     >
       <Box
         sx={(t) => ({
@@ -172,6 +178,7 @@ const mdxComponents = {
   IconMail,
   IconBrandLinkedin,
   IconBrandGithub,
+  List,
   Obfuscate,
   ActionIcon,
   Box,
@@ -182,6 +189,7 @@ export function Index({ doc }) {
   const handlePrint = () => {
     if (window !== undefined) window.print();
   };
+
   return (
     <Golden>
       <Box

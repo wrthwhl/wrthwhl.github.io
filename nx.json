@@ -6,7 +6,7 @@
   },
   "cli": {
     "defaultCollection": "@nrwl/next",
-    "packageManager": "yarn"
+    "packageManager": "pnpm"
   },
   "implicitDependencies": {
     "package.json": {
@@ -17,10 +17,9 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "MzhhODdkZjgtYTk2NS00ZjljLTg5NTgtMDhiNWZiNmJkMTNkfHJlYWQtd3JpdGU="
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
   },
