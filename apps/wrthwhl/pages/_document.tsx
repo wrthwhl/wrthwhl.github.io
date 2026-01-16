@@ -1,14 +1,9 @@
-import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
-import createEmotionServer from '@emotion/server/create-instance';
-import { ColorSchemeScript } from '@mantine/core';
-import { createGetInitialProps } from '@mantine/emotion';
-import { emotionCache } from '../emotion/cache';
+import { Head, Html, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
-    <Html lang="en" suppressHydrationWarning>
+    <Html lang="en" className="dark">
       <Head>
-        <ColorSchemeScript forceColorScheme="dark" />
         <link
           href="https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,800;1,400;1,800&display=swap"
           rel="stylesheet"
@@ -40,7 +35,3 @@ export default function Document() {
     </Html>
   );
 }
-
-const stylesServer = createEmotionServer(emotionCache);
-
-Document.getInitialProps = createGetInitialProps(NextDocument, stylesServer);

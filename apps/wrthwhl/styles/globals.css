@@ -1,5 +1,86 @@
+@import 'tailwindcss';
+
+/* Custom theme colors matching original Mantine theme */
+@theme {
+  /* Dark colors (from Mantine dark palette) */
+  --color-dark-0: #717d79;
+  --color-dark-1: #63706b;
+  --color-dark-2: #5b625f;
+  --color-dark-3: #444947;
+  --color-dark-4: #373b39;
+  --color-dark-5: #2e3130;
+  --color-dark-6: #272a29;
+  --color-dark-7: #202221;
+  --color-dark-8: #171918;
+  --color-dark-9: #101211;
+
+  /* Teal from original theme */
+  --color-teal-0: #e0f8f3;
+  --color-teal-1: #ccf3ea;
+  --color-teal-2: #b8eae0;
+  --color-teal-3: #a1ded2;
+  --color-teal-4: #83cdc1;
+  --color-teal-5: #53b9ab;
+  --color-teal-6: #12a594;
+  --color-teal-7: #0d9b8a;
+  --color-teal-8: #008573;
+  --color-teal-9: #0d3d38;
+
+  /* Gray for text (light to dark: 0-9) */
+  --color-gray-0: #f8f9fa;
+  --color-gray-1: #f1f3f5;
+  --color-gray-2: #e9ecef;
+  --color-gray-3: #dee2e6;
+  --color-gray-4: #ced4da;
+  --color-gray-5: #adb5bd;
+  --color-gray-6: #868e96;
+  --color-gray-7: #495057;
+  --color-gray-8: #343a40;
+  --color-gray-9: #212529;
+
+  /* Font families */
+  --font-heading: 'Kufam', sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/* Base styles */
+@layer base {
+  body {
+    @apply bg-dark-8 text-gray-2 antialiased;
+  }
+}
+
+/* Print styles */
 @media print {
   .no-print {
     display: none !important;
   }
+
+  body {
+    background: transparent !important;
+    color: var(--color-gray-9) !important;
+  }
+
+  /* Darker teal for print */
+  .text-teal-5 {
+    color: var(--color-teal-8) !important;
+  }
+
+  /* Darker grays for print */
+  .text-gray-2 {
+    color: var(--color-gray-7) !important;
+  }
+
+  .text-gray-4 {
+    color: var(--color-gray-8) !important;
+  }
+
+  .text-gray-6 {
+    color: var(--color-gray-7) !important;
+  }
+}
+
+@page {
+  margin: 0.5cm 1.5cm;
 }
