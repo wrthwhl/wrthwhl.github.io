@@ -1,101 +1,80 @@
 ---
 lastEditedAt: 'Jan 15, 2026'
+name: Marco Kunz
+nationality: Swiss
+yob: 1984
+avatar: /marco illustration glasses smile 2.png
+contact:
+  phone: '+41793790928'
+  email: kunz.marco@gmail.com
+  linkedin: marcokunz
+  github: wrthwhl
 ---
 
-<Box sx={{display: "flex", alignItems: "start"}}>
-  <Avatar src="/marco illustration glasses smile 2.png" alt="Marco Kunz" size="xl" sx={(t) => ({ borderRadius: t.other.fib(-1, 'em'), marginBottom: t.other.fib(-1, 'em') })} />
-  <Box sx={(t) => ({display: "flex", flexDirection: "column", margin: `${t.other.fib(-5, "em")} ${t.other.fib(0, "em")}`})}>
-    <Title style={{fontWeight: "bold", fontVariant: "all-small-caps", display:"inline", }} sx={(t)=>({color: t.colors.teal[5], cursor: "default", "&:hover":{color: t.colors.teal[3]}})}>Marco Kunz</Title>
-    <Text size="xs" sx={(t) => ({color: t.colors.gray[5]})}>Nationality: Swiss</Text>
-    <Text size="xs" sx={(t) => ({color: t.colors.gray[5]})}>YoB: 1984</Text>
-  </Box>
-</Box>
+<Header />
 
-<Box
-  sx={(t) => ({
-    margin: `${t.other.fib( 1, 'em')} 0 ${t.other.fib(2, 'em')}`,
-  })}
->
-  <Text size="md" sx={(t) => ({textAlign: "justify", color: t.colors.gray[2], cursor: "default"})}>Hands-on <Text component="span" weight="900" size="lg" sx={(t)=>({color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}})}>Engineering Manager</Text> with <Text component="span" weight="600" size="md" sx={(t)=>({color: t.colors.teal[5],"&:hover":{color: t.colors.teal[3]}})}> 10+ years of software development and delivery experience</Text> and <Text component="i" weight="600" size="md" sx={(t)=>({color: t.colors.teal[5],"&:hover":{color: t.colors.teal[3]}})}>5+ years of experience leading and growing remote, cross-functional teams</Text> building and owning end-to-end complex, data-heavy, and computer-vision-powered software solutions. Looking for an opportunity to leverage my technical expertise, leadership skills, and passion for growing engineers and fostering highly productive teams.</Text>
-</Box>
+<Summary>
+Hands-on **Engineering Manager** with *10+ years of software development and delivery experience* and *5+ years of experience leading and growing remote, cross-functional teams* building and owning end-to-end complex, data-heavy, and computer-vision-powered software solutions. Looking for an opportunity to leverage my technical expertise, leadership skills, and passion for growing engineers and fostering highly productive teams.
+</Summary>
 
-<Divider label={<><IconBriefcase size={14} /><Text color="dimmed" ml={5} size="xs">Experience</Text></>} labelPosition="Center"  />
-<TimelineItem  title="Director Visual Intelligence" org="Solera" startYear="2021" endYear="2026" sx={(t) => ({"& ul": {'padding-left': "1em", margin: `${t.other.fib(-1, "em")} auto 0`}, "& p": {color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}}})}>{<ul><li>Led a cross-functional, distributed, largely self-sufficient team of 10+ software engineers, data scientists, and ML engineers in the end-to-end development, launch, operation, and maintenance of a complex Computer Vision solution.</li>
-<li>Owned vision, strategy, roadmap, and technical decisions while empowering engineers to take ownership of projects from problem definition through delivery.</li>
-<li>Grew and mentored the team with a focus on personal and professional development, regular feedback, and improving the reliability and speed of the delivery platform.</li>
-<li>Stayed hands-on, contributing code, being involved in code reviews, helping to investigate issues, improving developer tooling and CI/CD pipelines, hosting a Software Delivery Hour and ML Talk series.</li>
-<li>Developed and maintained the team's internal testing and demo web app and other tooling.</li>
-</ul>}</TimelineItem>
-<TimelineItem  title="Technical Product Manager" org="Solera" startYear="2019" endYear="2021" sx={(t) => ({"& p": {color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}}})}>Drove product strategy and delivery for a critical data platform, working cross-functionally with engineering and business teams. Contributed technically through code reviews, API design discussions, and prototyping.</TimelineItem>
-<TimelineItem  title="Product Owner Data Pipeline" org="Siroop" startYear="2016" endYear="2018" sx={(t) => ({"& p": {color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}}})}>Led product strategy for a critical data platform and search experience, stabilizing the pipeline, eliminating tech debt, and implementing features that directly advanced the customer journey.</TimelineItem>
-<TimelineItem  title="Fleet Manager EMEA (Streetview)" org="Google" startYear="2013" endYear="2014" sx={(t) => ({"& p": {color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}}})}>Rapidly assumed leadership of the Street View EMEA fleet and delivered a comprehensive fleet renewal program across the region while building strategic supplier partnerships.</TimelineItem>
-<TimelineItem  title="Program Manager Hub Automation" org="Swiss Post International" startYear="2006" endYear="2011" sx={(t) => ({"& p": {color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}}})}>Led a program to enhance operational efficiency across Swiss Post's European logistics hubs through strategic automation initiatives.</TimelineItem>
+<Section title="Experience" icon="briefcase">
+  <Job title="Director Visual Intelligence" org="Solera" start="2021" end="2026">
+    - Led a cross-functional, distributed, largely self-sufficient team of 10+ software engineers, data scientists, and ML engineers in the end-to-end development, launch, operation, and maintenance of a complex Computer Vision solution.
+    - Owned vision, strategy, roadmap, and technical decisions while empowering engineers to take ownership of projects from problem definition through delivery.
+    - Grew and mentored the team with a focus on personal and professional development, regular feedback, and improving the reliability and speed of the delivery platform.
+    - Stayed hands-on, contributing code, being involved in code reviews, helping to investigate issues, improving developer tooling and CI/CD pipelines, hosting a Software Delivery Hour and ML Talk series.
+    - Developed and maintained the team's internal testing and demo web app and other tooling.
+  </Job>
 
-<Divider label={<><IconSchool size={14} /><Text color="dimmed" ml={5} size="xs">Education</Text></>} labelPosition="Center"  />
-<TimelineItem  title="Full-Stack Web Engineering Course" org="Codeworks" startYear="2018" endYear="2018" sx={(t) => ({"& p": {color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}}})}>3 month immersive web engineering course to deepen web development skills and foundational knowledge. Focused on data structures, code patterns as well as modern front and back end frameworks/technologies such as React, Node.js, GraphQL, TypeScript.</TimelineItem>
-<TimelineItem  title="B.Sc. in Business Engineering (Dipl.-Ing.)" org="UAS Northwestern Switzerland" startYear="2003" endYear="2006" sx={(t) => ({"& p": {color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}}})}>Specialization in Supply Chain Management. Key subjects included software engineering, product management, project management, production processes, operations, management, marketing and sales.</TimelineItem>
-<TimelineItem  title="Computer Science Apprenticeship" org="Swisscom" startYear="1999" endYear="2003" sx={(t) => ({"& p": {color: t.colors.teal[5], "&:hover":{color: t.colors.teal[3]}}})}>Combination of on and off-the-job vocational training focusing on systems engineering and administration, application development and electrical engineering. Including vocational baccalaureate for university admission.</TimelineItem>
+  <Job title="Technical Product Manager" org="Solera" start="2019" end="2021">
+    Drove product strategy and delivery for a critical data platform, working cross-functionally with engineering and business teams. Contributed technically through code reviews, API design discussions, and prototyping.
+  </Job>
 
-<Divider label={<><IconBulb size={14} /><Text color="dimmed" ml={5} size="xs">Skills</Text></>} labelPosition="Center"  />
-<Box size="sm" sx={(t) => ({ margin: `${t.other.fib( 1, 'em')} ${t.other.fib( 0, 'em')}`, display: "flex", flexDirection: "row", justifyContent: "space-evenly"})}>
-  <Box sx={(t) => ({maxWidth: t.other.fib(6,"em"), margin: `0 ${t.other.fib(1,"em")}`, textAlign: "center"})}>
-    <Box sx={(t)=>({display: "flex", justifyContent: "center", "& > div": {position: "relative", width: 22, height: 22}, "& svg": {position: "absolute", top: 0, left: 0}, "& svg:first-of-type": {color: t.colors.teal[5], fill: "transparent"}, "& svg:last-of-type": {color: t.colors.teal[3], fill: t.colors.teal[3], clipPath: "circle(0% at 50% 50%)", transition: "clip-path 0.3s ease"}, "& > div:hover svg:last-of-type, & > div:hover ~ div svg:last-of-type": {clipPath: "circle(75% at 50% 50%)"}})}>
-  {[...Array(5).keys()].map((i) => (<Box key={i}><IconStar size={22} /><IconStar size={22} /></Box>))}
-</Box>
-    <Box sx={(t)=>({marginTop: t.other.fib(-1,"em")})}>
-      <Text color="dimmed" sx={{fontVariant:"all-small-caps"}} size="sm">Management & Leadership</Text>
-      <Text sx={(t) => ({color: t.colors.gray[2]})} size="xs">Team Building, Mentoring & Coaching, Cross-Functional Collaboration, Hiring, Feedback & Performance</Text>
-    </Box>
-    <Box sx={(t)=>({marginTop: t.other.fib(-1,"em")})}>
-      <Text color="dimmed" sx={{fontVariant:"all-small-caps"}} size="sm">Software Engineering</Text>
-      <Text sx={(t) => ({color: t.colors.gray[2]})} size="xs">Full-Stack Development (TypeScript, React, Node.js, Python), API Design, GraphQL, System Design</Text>
-    </Box>
-    <Box sx={(t)=>({marginTop: t.other.fib(-1,"em")})}>
-      <Text color="dimmed" sx={{fontVariant:"all-small-caps"}} size="sm">Software Delivery</Text>
-      <Text sx={(t) => ({color: t.colors.gray[2]})} size="xs">Code Review Practices, CI/CD, DevOps, DORA Metrics</Text>
-    </Box>
-    <Box sx={(t)=>({marginTop: t.other.fib(-1,"em")})}>
-      <Text color="dimmed" sx={{fontVariant:"all-small-caps"}} size="sm">Product</Text>
-      <Text sx={(t) => ({color: t.colors.gray[2]})} size="xs">Vision & Strategy, Roadmapping, Prioritization, Data-Driven Decision Making</Text>
-    </Box>
-  </Box>
-  <Box sx={(t) => ({maxWidth: t.other.fib(6,"em"), margin: `0 ${t.other.fib(1,"em")}`, textAlign: "center"})}>
-    <Box sx={(t)=>({display: "flex", justifyContent: "center", "& > div": {position: "relative", width: 22, height: 22}, "& svg": {position: "absolute", top: 0, left: 0}, "& svg:first-of-type": {color: t.colors.teal[5], fill: "transparent"}, "& svg:last-of-type": {color: t.colors.teal[3], fill: t.colors.teal[3], clipPath: "circle(0% at 50% 50%)", transition: "clip-path 0.3s ease"}, "& > div:hover svg:last-of-type, & > div:hover ~ div svg:last-of-type": {clipPath: "circle(75% at 50% 50%)"}})}>
-  {[...Array(3).keys()].map((i) => (<Box key={i}><IconStar size={22} /><IconStar size={22} /></Box>))}
-</Box>
-    <Box sx={(t)=>({marginTop: t.other.fib(-1,"em")})}>
-      <Text color="dimmed" sx={{fontVariant:"all-small-caps"}} size="sm">Management & Leadership</Text>
-      <Text sx={(t) => ({color: t.colors.gray[2]})} size="xs">Distributed Team Leadership, Change Management, Culture Building</Text>
-    </Box>
-    <Box sx={(t)=>({marginTop: t.other.fib(-1,"em")})}>
-      <Text color="dimmed" sx={{fontVariant:"all-small-caps"}} size="sm">Software Engineering</Text>
-      <Text sx={(t) => ({color: t.colors.gray[2]})} size="xs">PostgreSQL, Database Design, Systems Thinking, Code Quality & Best Practices</Text>
-    </Box>
-    <Box sx={(t)=>({marginTop: t.other.fib(-1,"em")})}>
-      <Text color="dimmed" sx={{fontVariant:"all-small-caps"}} size="sm">Software Delivery</Text>
-      <Text sx={(t) => ({color: t.colors.gray[2]})} size="xs">Deployment Strategies, Build & Test Automation, Monitoring & Observability</Text>
-    </Box>
-    <Box sx={(t)=>({marginTop: t.other.fib(-1,"em")})}>
-      <Text color="dimmed" sx={{fontVariant:"all-small-caps"}} size="sm">Data & ML</Text>
-      <Text sx={(t) => ({color: t.colors.gray[2]})} size="xs">Model Evaluation, Computer Vision, Data Quality Management, Analytics & Reporting</Text>
-    </Box>
-  </Box>
-</Box>
+  <Job title="Product Owner Data Pipeline" org="Siroop" start="2016" end="2018">
+    Led product strategy for a critical data platform and search experience, stabilizing the pipeline, eliminating tech debt, and implementing features that directly advanced the customer journey.
+  </Job>
 
-<Box sx={{"@media print": {display: "none"}}}>
-  <Divider label={<><IconId size={14} /><Text color="dimmed" ml={5} size="xs">Contact</Text></>} labelPosition="Center" />
-  <Box sx={(t)=>({display: "flex", flexDirection: "row", margin: `${t.other.fib( 2, 'em')} ${t.other.fib( 1, 'em')}`, justifyContent: "space-evenly"})}>
-    <Obfuscate tel="+41793790928" aria-label="Call me!">
-      <ActionIcon size={50} variant="transparent" sx={(t) => ({color: t.colors.teal[5], "& svg:hover":{color: t.colors.teal[4], strokeWidth: 1}})}><IconPhone size={50} stroke={0.5} /></ActionIcon>
-    </Obfuscate>
-    <Obfuscate email="kunz.marco@gmail.com" aria-label="Mail me!">
-      <ActionIcon size={50} variant="transparent" sx={(t) => ({color: t.colors.teal[5], "& svg:hover":{color: t.colors.teal[4], strokeWidth: 1}})}><IconMail size={50} stroke={0.5} /></ActionIcon>
-    </Obfuscate>
-    <a href="https://www.linkedin.com/in/marcokunz/">
-      <ActionIcon size={50} variant="transparent" sx={(t) => ({color: t.colors.teal[5], "& svg:hover":{color: t.colors.teal[4], strokeWidth: 1}})}><IconBrandLinkedin size={50} stroke={0.5} /></ActionIcon>
-    </a>
-    <a href="https://github.com/wrthwhl/">
-      <ActionIcon size={50} variant="transparent" sx={(t) => ({color: t.colors.teal[5], "& svg:hover":{color: t.colors.teal[4], strokeWidth: 1}})}><IconBrandGithub size={50} stroke={0.5} /></ActionIcon>
-    </a>
-  </Box>
-</Box>
+  <Job title="Fleet Manager EMEA (Streetview)" org="Google" start="2013" end="2014">
+    Rapidly assumed leadership of the Street View EMEA fleet and delivered a comprehensive fleet renewal program across the region while building strategic supplier partnerships.
+  </Job>
+
+  <Job title="Program Manager Hub Automation" org="Swiss Post International" start="2006" end="2011">
+    Led a program to enhance operational efficiency across Swiss Post's European logistics hubs through strategic automation initiatives.
+  </Job>
+</Section>
+
+<Section title="Education" icon="school">
+  <Job title="Full-Stack Web Engineering Course" org="Codeworks" start="2018" end="2018">
+    3 month immersive web engineering course to deepen web development skills and foundational knowledge. Focused on data structures, code patterns as well as modern front and back end frameworks/technologies such as React, Node.js, GraphQL, TypeScript.
+  </Job>
+
+  <Job title="B.Sc. in Business Engineering (Dipl.-Ing.)" org="UAS Northwestern Switzerland" start="2003" end="2006">
+    Specialization in Supply Chain Management. Key subjects included software engineering, product management, project management, production processes, operations, management, marketing and sales.
+  </Job>
+
+  <Job title="Computer Science Apprenticeship" org="Swisscom" start="1999" end="2003">
+    Combination of on and off-the-job vocational training focusing on systems engineering and administration, application development and electrical engineering. Including vocational baccalaureate for university admission.
+  </Job>
+</Section>
+
+<Section title="Skills" icon="lightbulb">
+  <Skills>
+    <SkillGroup rating={5}>
+      <Skill category="Management & Leadership">Team Building, Mentoring & Coaching, Cross-Functional Collaboration, Hiring, Feedback & Performance</Skill>
+      <Skill category="Software Engineering">Full-Stack Development (TypeScript, React, Node.js, Python), API Design, GraphQL, System Design</Skill>
+      <Skill category="Software Delivery">Code Review Practices, CI/CD, DevOps, DORA Metrics</Skill>
+      <Skill category="Product">Vision & Strategy, Roadmapping, Prioritization, Data-Driven Decision Making</Skill>
+    </SkillGroup>
+
+    <SkillGroup rating={3}>
+      <Skill category="Management & Leadership">Distributed Team Leadership, Change Management, Culture Building</Skill>
+      <Skill category="Software Engineering">PostgreSQL, Database Design, Systems Thinking, Code Quality & Best Practices</Skill>
+      <Skill category="Software Delivery">Deployment Strategies, Build & Test Automation, Monitoring & Observability</Skill>
+      <Skill category="Data & ML">Model Evaluation, Computer Vision, Data Quality Management, Analytics & Reporting</Skill>
+    </SkillGroup>
+  </Skills>
+</Section>
+
+<Section title="Contact" icon="contact" noPrint>
+  <Contact />
+</Section>

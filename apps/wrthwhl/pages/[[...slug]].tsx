@@ -4,13 +4,10 @@ import {
   Container,
   Title,
   Text,
-  Timeline,
   Divider,
   ActionIcon,
   Button,
-  List,
 } from '@mantine/core';
-import { EmotionSx } from '@mantine/emotion';
 import {
   IconSchool,
   IconBriefcase,
@@ -23,9 +20,36 @@ import {
   IconBrandGithub,
 } from '@tabler/icons-react';
 import { useMDXComponent } from 'next-contentlayer2/hooks';
-import { allResumes } from '@wrthwhl/content';
+import { allResumes, Resume } from '@wrthwhl/content';
 import Obfuscate from 'react-obfuscate';
-import { CSSProperties, useEffect, useState, ReactNode } from 'react';
+import {
+  useEffect,
+  useState,
+  ReactNode,
+  createContext,
+  useContext,
+} from 'react';
+
+// Keep fib function for golden ratio spacing
+const fib = (
+  values: Array<number | string> | number,
+  suffix = '',
+  factor = 1,
+): string => {
+  const params: Array<number | string> =
+    typeof values === 'number' ? [values] : values;
+  const res: Array<number | string> = [];
+  for (const val of params) {
+    if (typeof val === 'number')
+      res.push(`${Math.round(0.618 ** -val * factor * 1000) / 1000}${suffix}`);
+    else res.push(val);
+  }
+  return res.join(' ');
+};
+
+// Context to pass document data to components
+const ResumeContext = createContext<Resume | null>(null);
+const useResume = () => useContext(ResumeContext);
 
 // Client-only wrapper to prevent hydration mismatch with react-obfuscate
 const ClientOnly = ({ children }: { children: ReactNode }) => {
@@ -37,21 +61,8 @@ const ClientOnly = ({ children }: { children: ReactNode }) => {
   return <>{children}</>;
 };
 
-// Wrapper for Obfuscate to prevent hydration errors
-const SafeObfuscate = (props: React.ComponentProps<typeof Obfuscate>) => (
-  <ClientOnly>
-    <Obfuscate {...props} />
-  </ClientOnly>
-);
-
-const Golden = ({
-  children,
-  style,
-  ...rest
-}: {
-  children: ReactNode;
-  style?: CSSProperties;
-}) => {
+// Golden ratio layout wrapper
+const Golden = ({ children }: { children: ReactNode }) => {
   return (
     <Box
       style={{
@@ -62,9 +73,7 @@ const Golden = ({
         flexGrow: 1,
         width: '100%',
         height: '100%',
-        ...style,
       }}
-      {...rest}
     >
       <Box style={{ flex: '1 1 38.2%' }} />
       <Box
@@ -76,12 +85,7 @@ const Golden = ({
         }}
       >
         <Box style={{ flex: '1 1 38.2%' }} />
-        <Container
-          style={{
-            flex: '0 0 auto',
-            maxWidth: '80ch',
-          }}
-        >
+        <Container style={{ flex: '0 0 auto', maxWidth: '80ch' }}>
           {children}
         </Container>
         <Box style={{ flex: '1 1 61.8%' }} />
@@ -91,47 +95,146 @@ const Golden = ({
   );
 };
 
-// Import fib function from theme for use in components
-import { fib } from '../theme';
+// --- Semantic Components ---
 
-const mdxComponents = {
-  Avatar,
-  Section: ({
-    children,
-    mx,
-    my,
-  }: {
-    children: React.ReactNode;
-    mx?: number;
-    my?: number;
-  }) => (
+const Header = ({ children }: { children?: ReactNode }) => {
+  const resume = useResume();
+  if (!resume) return null;
+
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'start' }}>
+      {resume.avatar && (
+        <Avatar
+          src={resume.avatar}
+          alt={resume.name}
+          size="xl"
+          sx={(t) => ({
+            borderRadius: t.other.fib(-1, 'em'),
+            marginBottom: t.other.fib(-1, 'em'),
+          })}
+        />
+      )}
+      <Box
+        sx={(t) => ({
+          display: 'flex',
+          flexDirection: 'column',
+          margin: `${t.other.fib(-5, 'em')} ${t.other.fib(0, 'em')}`,
+        })}
+      >
+        <Title
+          style={{
+            fontWeight: 'bold',
+            fontVariant: 'all-small-caps',
+            display: 'inline',
+          }}
+          sx={(t) => ({
+            color: t.colors.teal[5],
+            cursor: 'default',
+            '&:hover': { color: t.colors.teal[3] },
+          })}
+        >
+          {resume.name}
+        </Title>
+        {resume.nationality && (
+          <Text size="xs" sx={(t) => ({ color: t.colors.gray[5] })}>
+            Nationality: {resume.nationality}
+          </Text>
+        )}
+        {resume.yob && (
+          <Text size="xs" sx={(t) => ({ color: t.colors.gray[5] })}>
+            YoB: {resume.yob}
+          </Text>
+        )}
+      </Box>
+    </Box>
+  );
+};
+
+const Summary = ({ children }: { children: ReactNode }) => {
+  return (
     <Box
-      style={{
-        margin: `${fib(my || 3, 'em')} ${fib(mx || 0, 'em')}`,
-      }}
+      sx={(t) => ({
+        margin: `${t.other.fib(1, 'em')} 0 ${t.other.fib(2, 'em')}`,
+        fontSize: 'var(--mantine-font-size-md)',
+        textAlign: 'justify',
+        color: t.colors.gray[2],
+        cursor: 'default',
+        '& strong': {
+          color: t.colors.teal[5],
+          fontWeight: 900,
+          fontSize: 'var(--mantine-font-size-lg)',
+        },
+        '& strong:hover': {
+          color: t.colors.teal[3],
+        },
+        '& em': {
+          color: t.colors.teal[5],
+          fontWeight: 600,
+        },
+        '& em:hover': {
+          color: t.colors.teal[3],
+        },
+      })}
     >
       {children}
     </Box>
-  ),
-  Title,
-  Text,
-  TimelineItem: ({
-    children,
-    title,
-    org,
-    startYear,
-    endYear,
-    sx,
-  }: {
-    children: React.ReactNode;
-    title: string;
-    org: string;
-    startYear: string;
-    endYear?: string;
-    sx?: EmotionSx;
-  }) => (
+  );
+};
+
+const iconMap: Record<string, typeof IconBriefcase> = {
+  briefcase: IconBriefcase,
+  school: IconSchool,
+  lightbulb: IconBulb,
+  contact: IconId,
+};
+
+const Section = ({
+  title,
+  icon,
+  children,
+  noPrint,
+}: {
+  title: string;
+  icon?: string;
+  children: ReactNode;
+  noPrint?: boolean;
+}) => {
+  const Icon = icon ? iconMap[icon] : null;
+
+  return (
+    <Box sx={noPrint ? { '@media print': { display: 'none' } } : undefined}>
+      <Divider
+        style={{ margin: `${fib(1, 'em')} 0` }}
+        label={
+          <>
+            {Icon && <Icon size={14} />}
+            <Text color="dimmed" ml={5} size="xs">
+              {title}
+            </Text>
+          </>
+        }
+        labelPosition="center"
+      />
+      {children}
+    </Box>
+  );
+};
+
+const Job = ({
+  title,
+  org,
+  start,
+  end,
+  children,
+}: {
+  title: string;
+  org: string;
+  start: string;
+  end?: string;
+  children: ReactNode;
+}) => {
+  return (
     <Box
-      sx={sx}
       style={{
         display: 'flex',
         flexDirection: 'row',
@@ -155,7 +258,7 @@ const mdxComponents = {
           }}
         >
           <Text c="dimmed" inherit>
-            {endYear || 'Now'}
+            {end || 'Now'}
           </Text>
           <Box
             style={{
@@ -165,7 +268,7 @@ const mdxComponents = {
             }}
           />
           <Text c="dimmed" inherit>
-            {startYear}
+            {start}
           </Text>
         </Box>
       </Box>
@@ -173,91 +276,231 @@ const mdxComponents = {
         <Text
           size="sm"
           fw="bold"
-          style={{
+          component="span"
+          sx={(t) => ({
             cursor: 'default',
-          }}
+            color: t.colors.teal[5],
+            '&:hover': { color: t.colors.teal[3] },
+          })}
         >
-          {title}{' '}
-          <Text size="sm" c="dimmed" component="span">
-            @ {org}
-          </Text>
+          {title}
+        </Text>{' '}
+        <Text size="sm" c="dimmed" component="span">
+          @ {org}
         </Text>
         <Box
-          style={{
+          sx={(t) => ({
             fontSize: 'var(--mantine-font-size-sm)',
             lineHeight: 'var(--mantine-line-height-sm)',
             color: 'var(--mantine-color-gray-4)',
-            marginBottom: fib(-3, 'em'),
-          }}
+            marginBottom: t.other.fib(-3, 'em'),
+            '& ul': {
+              paddingLeft: '1em',
+              margin: `${t.other.fib(-1, 'em')} auto 0`,
+            },
+          })}
         >
           {children}
         </Box>
       </Box>
     </Box>
-  ),
-  Divider: ({ ...props }) => (
-    <Divider style={{ margin: `${fib(1, 'em')} 0` }} {...props} />
-  ),
-  Timeline,
-  IconBriefcase,
-  IconBulb,
-  IconSchool,
-  IconId,
-  IconStar,
-  IconPhone,
-  IconMail,
-  IconBrandLinkedin,
-  IconBrandGithub,
-  List,
-  Obfuscate: SafeObfuscate,
-  ActionIcon,
-  Box,
+  );
 };
 
-export function Index({ doc }: { doc: { body: { code: string } } }) {
+const SkillGroup = ({
+  rating,
+  children,
+}: {
+  rating: number;
+  children: ReactNode;
+}) => {
+  return (
+    <Box
+      sx={(t) => ({
+        maxWidth: t.other.fib(6, 'em'),
+        margin: `0 ${t.other.fib(1, 'em')}`,
+        textAlign: 'center',
+      })}
+    >
+      <Box
+        sx={(t) => ({
+          display: 'flex',
+          justifyContent: 'center',
+          '& > div': { position: 'relative', width: 22, height: 22 },
+          '& svg': { position: 'absolute', top: 0, left: 0 },
+          '& svg:first-of-type': {
+            color: t.colors.teal[5],
+            fill: 'transparent',
+          },
+          '& svg:last-of-type': {
+            color: t.colors.teal[3],
+            fill: t.colors.teal[3],
+            clipPath: 'circle(0% at 50% 50%)',
+            transition: 'clip-path 0.3s ease',
+          },
+          '& > div:hover svg:last-of-type, & > div:hover ~ div svg:last-of-type':
+            {
+              clipPath: 'circle(75% at 50% 50%)',
+            },
+        })}
+      >
+        {[...Array(rating).keys()].map((i) => (
+          <Box key={i}>
+            <IconStar size={22} />
+            <IconStar size={22} />
+          </Box>
+        ))}
+      </Box>
+      {children}
+    </Box>
+  );
+};
+
+const Skill = ({
+  category,
+  children,
+}: {
+  category: string;
+  children: ReactNode;
+}) => {
+  return (
+    <Box sx={(t) => ({ marginTop: t.other.fib(-1, 'em') })}>
+      <Text color="dimmed" sx={{ fontVariant: 'all-small-caps' }} size="sm">
+        {category}
+      </Text>
+      <Text sx={(t) => ({ color: t.colors.gray[2] })} size="xs">
+        {children}
+      </Text>
+    </Box>
+  );
+};
+
+const Skills = ({ children }: { children: ReactNode }) => {
+  return (
+    <Box
+      sx={(t) => ({
+        margin: `${t.other.fib(1, 'em')} ${t.other.fib(0, 'em')}`,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+      })}
+    >
+      {children}
+    </Box>
+  );
+};
+
+const Contact = () => {
+  const resume = useResume();
+  if (!resume?.contact) return null;
+
+  const { phone, email, linkedin, github } = resume.contact;
+
+  const iconStyle = (t: any) => ({
+    color: t.colors.teal[5],
+    '& svg:hover': { color: t.colors.teal[4], strokeWidth: 1 },
+  });
+
+  return (
+    <Box
+      sx={(t) => ({
+        display: 'flex',
+        flexDirection: 'row',
+        margin: `${t.other.fib(2, 'em')} ${t.other.fib(1, 'em')}`,
+        justifyContent: 'space-evenly',
+      })}
+    >
+      {phone && (
+        <ClientOnly>
+          <Obfuscate tel={phone} aria-label="Call me!">
+            <ActionIcon size={50} variant="transparent" sx={iconStyle}>
+              <IconPhone size={50} stroke={0.5} />
+            </ActionIcon>
+          </Obfuscate>
+        </ClientOnly>
+      )}
+      {email && (
+        <ClientOnly>
+          <Obfuscate email={email} aria-label="Mail me!">
+            <ActionIcon size={50} variant="transparent" sx={iconStyle}>
+              <IconMail size={50} stroke={0.5} />
+            </ActionIcon>
+          </Obfuscate>
+        </ClientOnly>
+      )}
+      {linkedin && (
+        <a href={`https://www.linkedin.com/in/${linkedin}/`}>
+          <ActionIcon size={50} variant="transparent" sx={iconStyle}>
+            <IconBrandLinkedin size={50} stroke={0.5} />
+          </ActionIcon>
+        </a>
+      )}
+      {github && (
+        <a href={`https://github.com/${github}/`}>
+          <ActionIcon size={50} variant="transparent" sx={iconStyle}>
+            <IconBrandGithub size={50} stroke={0.5} />
+          </ActionIcon>
+        </a>
+      )}
+    </Box>
+  );
+};
+
+// MDX component mapping - only semantic components exposed
+const mdxComponents = {
+  Header,
+  Summary,
+  Section,
+  Job,
+  SkillGroup,
+  Skill,
+  Skills,
+  Contact,
+};
+
+export function Index({ doc }: { doc: Resume }) {
   const MdxContent = useMDXComponent(doc.body.code);
   const handlePrint = () => {
     if (typeof window !== 'undefined') window.print();
   };
 
   return (
-    <Golden>
-      <Box
-        style={{
-          maxWidth: '80ch',
-          margin: `${fib(1, 'em')} auto 0`,
-          paddingBottom: fib(1, 'em'),
-          position: 'relative',
-        }}
-      >
-        <Button
-          variant="outline"
-          onClick={handlePrint}
-          styles={{
-            root: {
-              margin: '1em auto',
-              display: 'block',
-              position: 'absolute',
-              right: 0,
-            },
+    <ResumeContext.Provider value={doc}>
+      <Golden>
+        <Box
+          style={{
+            maxWidth: '80ch',
+            margin: `${fib(1, 'em')} auto 0`,
+            paddingBottom: fib(1, 'em'),
+            position: 'relative',
           }}
-          className="no-print"
         >
-          Print
-        </Button>
-        <MdxContent components={mdxComponents} />
-      </Box>
-    </Golden>
+          <Button
+            variant="outline"
+            onClick={handlePrint}
+            styles={{
+              root: {
+                margin: '1em auto',
+                display: 'block',
+                position: 'absolute',
+                right: 0,
+              },
+            }}
+            className="no-print"
+          >
+            Print
+          </Button>
+          <MdxContent components={mdxComponents} />
+        </Box>
+      </Golden>
+    </ResumeContext.Provider>
   );
 }
 
 export const getStaticPaths = () => {
-  // Generate paths for each resume
   const paths = allResumes.map((resume) => ({
     params: { slug: [resume.slug] },
   }));
-
-  // Add root path (/) which uses the first/default resume
   paths.push({ params: { slug: [] } });
 
   return {
@@ -272,8 +515,6 @@ export const getStaticProps = ({
   params?: { slug?: string[] };
 }) => {
   const slug = params?.slug?.[0] || 'resume';
-
-  // Find the matching resume, or default to first one for root path
   const doc = allResumes.find((r) => r.slug === slug) || allResumes[0];
 
   return {
