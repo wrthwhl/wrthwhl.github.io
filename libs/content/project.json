@@ -1,18 +1,20 @@
 {
+  "name": "content",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/content/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/content/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/content"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/content"],
       "options": {
         "jestConfig": "libs/content/jest.config.ts",
         "passWithNoTests": true
@@ -21,10 +23,9 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["contentlayer build"],
+        "commands": ["contentlayer2 build"],
         "cwd": "libs/content"
       }
     }
-  },
-  "tags": []
+  }
 }

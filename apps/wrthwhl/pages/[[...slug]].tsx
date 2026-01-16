@@ -22,7 +22,7 @@ import {
   IconBrandLinkedin,
   IconBrandGithub,
 } from '@tabler/icons-react';
-import { useMDXComponent } from 'next-contentlayer/hooks';
+import { useMDXComponent } from 'next-contentlayer2/hooks';
 import { allResumes } from '@wrthwhl/content';
 import Obfuscate from 'react-obfuscate';
 import { CSSProperties, useEffect, useState, ReactNode } from 'react';
@@ -49,7 +49,7 @@ const Golden = ({
   style,
   ...rest
 }: {
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
   style?: CSSProperties;
 }) => {
   return (

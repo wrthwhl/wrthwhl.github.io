@@ -1,10 +1,12 @@
 {
+  "name": "wrthwhl",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/wrthwhl",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -21,14 +23,11 @@
     "dev": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "cd libs/content && contentlayer dev --verbose",
-          "nx serve wrthwhl"
-        ]
+        "commands": ["contentlayer2 dev --verbose", "nx serve wrthwhl"]
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "wrthwhl:build",
@@ -46,26 +45,25 @@
       }
     },
     "export": {
-      "executor": "@nrwl/next:export",
+      "executor": "@nx/next:export",
       "options": {
         "buildTarget": "wrthwhl:build:production"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/wrthwhl"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/wrthwhl"],
       "options": {
         "jestConfig": "apps/wrthwhl/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/wrthwhl/**/*.{ts,tsx,js,jsx}"]
       }
     }
-  },
-  "tags": []
+  }
 }
