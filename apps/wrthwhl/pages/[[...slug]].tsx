@@ -21,7 +21,7 @@ import {
   IconMail,
   IconBrandLinkedin,
   IconBrandGithub,
-} from '@tabler/icons';
+} from '@tabler/icons-react';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import { allResumes } from '@wrthwhl/content';
 import Obfuscate from 'react-obfuscate';
