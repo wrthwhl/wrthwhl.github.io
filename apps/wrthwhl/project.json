@@ -5,16 +5,16 @@
   "targets": {
     "build": {
       "executor": "@nrwl/next:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "root": "apps/wrthwhl",
         "outputPath": "dist/apps/wrthwhl"
       },
       "configurations": {
-        "development": {},
+        "development": {
+          "outputPath": "apps/wrthwhl"
+        },
         "production": {}
       }
     },
@@ -53,9 +53,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/wrthwhl"
-      ],
+      "outputs": ["coverage/apps/wrthwhl"],
       "options": {
         "jestConfig": "apps/wrthwhl/jest.config.ts",
         "passWithNoTests": true
@@ -63,13 +61,9 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/wrthwhl/**/*.{ts,tsx,js,jsx}"
-        ]
+        "lintFilePatterns": ["apps/wrthwhl/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
