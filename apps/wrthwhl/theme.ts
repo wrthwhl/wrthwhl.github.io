@@ -28,10 +28,7 @@ export const theme: MantineThemeOverride = {
   },
 };
 
-export const styles = {
-  // Text: { root: { fontSize: '12px' } },
-  // Title: { root: { fontSize: '1.618rem' } },
-};
+export const styles = {};
 
 declare module '@mantine/core' {
   export interface MantineThemeOther {

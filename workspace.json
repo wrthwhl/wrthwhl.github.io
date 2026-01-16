@@ -3,8 +3,6 @@
   "version": 2,
   "projects": {
     "content": "libs/content",
-    "ui": "libs/ui",
-    "ui-e2e": "apps/ui-e2e",
     "wrthwhl": "apps/wrthwhl",
     "wrthwhl-e2e": "apps/wrthwhl-e2e"
   }

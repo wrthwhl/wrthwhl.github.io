@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
-import { theme, styles } from '@wrthwhl/ui';
+import { theme, styles } from '../theme';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
