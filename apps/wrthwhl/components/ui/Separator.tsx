@@ -29,17 +29,17 @@ const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(
         <div
           ref={ref}
           className={cn(
-            'flex items-center gap-3 my-[1.618em]',
+            'flex items-center gap-3 my-phi-xl',
             positionClasses[labelPosition],
             className,
           )}
           {...props}
         >
-          <div className="h-0 flex-1 border-t border-dark-4 print:border-gray-6" />
-          <span className="text-xs text-gray-6 flex items-center gap-1.5 print:text-gray-9">
+          <div className="h-0 flex-1 border-t border-subtle" />
+          <span className="text-muted-xs flex items-center gap-1.5">
             {label}
           </span>
-          <div className="h-0 flex-1 border-t border-dark-4 print:border-gray-6" />
+          <div className="h-0 flex-1 border-t border-subtle" />
         </div>
       );
     }
@@ -50,8 +50,8 @@ const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(
         className={cn(
           'shrink-0',
           orientation === 'horizontal'
-            ? 'h-0 w-full border-t border-dark-4 print:border-gray-6'
-            : 'h-full w-0 border-l border-dark-4 print:border-gray-6',
+            ? 'h-0 w-full border-t border-subtle'
+            : 'h-full w-0 border-l border-subtle',
           className,
         )}
         {...props}

@@ -19,11 +19,10 @@ export const Contact = () => {
 
   const { phone, email, linkedin, github } = resume.contact;
 
-  const iconClass =
-    'text-teal-5 hover:text-teal-4 hover:stroke-1 transition-colors';
+  const iconClass = 'icon-link hover:stroke-1';
 
   return (
-    <div className="flex flex-row my-[2.618em] mx-[1.618em] justify-evenly">
+    <div className="flex flex-row my-phi-2xl mx-phi-xl justify-evenly">
       {phone && (
         <ClientOnly>
           <Obfuscate tel={phone} aria-label="Call me!">

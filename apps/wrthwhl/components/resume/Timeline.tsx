@@ -17,28 +17,23 @@ const TimelineItem = ({
   children,
 }: TimelineItemProps) => {
   return (
-    <div
-      className="flex flex-row mx-[0.382em] my-[1.382em]"
-      style={{ breakInside: 'avoid' }}
-    >
-      <div className="mr-[1.382em] font-mono">
+    <div className="flex flex-row mx-phi-sm my-phi-lg print-avoid-break">
+      <div className="mr-phi-lg font-mono">
         <div className="h-full flex flex-col justify-between text-center">
-          <span className="text-gray-7">{end || 'Now'}</span>
-          <div className="w-1/2 h-full border-r border-gray-8" />
-          <span className="text-gray-7">{start}</span>
+          <span className="text-tertiary">{end || 'Now'}</span>
+          <div className="w-1/2 h-full border-r border-muted" />
+          <span className="text-tertiary">{start}</span>
         </div>
       </div>
       <div>
         <div>
-          <span className="text-sm font-bold cursor-default text-teal-5 hover:text-teal-3 transition-colors">
-            {title}
-          </span>{' '}
-          <span className="text-sm text-gray-6">@ {org}</span>
+          <span className="text-sm font-bold text-accent">{title}</span>{' '}
+          <span className="text-muted-sm">@ {org}</span>
         </div>
         <div
           className={cn(
-            'text-sm leading-snug text-gray-4 mb-[0.236em]',
-            '[&_ul]:pl-4 [&_ul]:mt-[0.618em] [&_ul]:list-disc',
+            'text-sm leading-snug text-description mb-phi-xs',
+            '[&_ul]:pl-4 [&_ul]:mt-phi-md [&_ul]:list-disc',
           )}
         >
           {children}
@@ -53,9 +48,7 @@ export interface TimelineProps {
 }
 
 export const Timeline = ({ children }: TimelineProps) => {
-  return (
-    <div style={{ breakAfter: 'auto', breakBefore: 'avoid' }}>{children}</div>
-  );
+  return <div className="print-avoid-break-before">{children}</div>;
 };
 
 Timeline.Item = TimelineItem;

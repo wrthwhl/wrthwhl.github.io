@@ -31,7 +31,7 @@ export function Index({ doc }: { doc: Resume }) {
   return (
     <ResumeContext.Provider value={doc}>
       <GoldenPageLayout>
-        <div className="max-w-[80ch] mx-auto pb-[1.618em]">
+        <div className="max-w-[80ch] mx-auto pb-phi-xl">
           <Header />
           <div className="px-4">
             <MdxContent components={mdxComponents} />

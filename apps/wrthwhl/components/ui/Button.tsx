@@ -7,11 +7,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-teal-6 text-dark-9 hover:bg-teal-5',
-        outline:
-          'border border-teal-5 bg-transparent text-teal-5 hover:bg-dark-7 hover:text-teal-3',
-        ghost: 'text-dark-0 hover:bg-dark-6 hover:text-gray-2',
-        link: 'text-teal-5 underline-offset-4 hover:underline',
+        default: 'btn-primary',
+        outline: 'btn-outline',
+        ghost: 'btn-ghost',
+        link: 'btn-link',
       },
       size: {
         default: 'h-9 px-4 py-2',

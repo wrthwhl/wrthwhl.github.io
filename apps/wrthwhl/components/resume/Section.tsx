@@ -6,6 +6,7 @@ import {
   Contact as ContactIcon,
 } from 'lucide-react';
 import { Separator } from '../ui/Separator';
+import { cn } from '../../lib/utils';
 
 const iconMap: Record<string, typeof Briefcase> = {
   briefcase: Briefcase,
@@ -28,10 +29,7 @@ export const Section = ({
   const Icon = icon ? iconMap[icon] : null;
 
   return (
-    <div
-      className={noPrint ? 'print:hidden' : undefined}
-      style={{ breakBefore: 'auto', breakAfter: 'avoid' }}
-    >
+    <div className={cn(noPrint && 'print:hidden', 'print-avoid-break-after')}>
       <Separator
         label={
           <>

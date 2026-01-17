@@ -38,7 +38,7 @@ export const Header = ({ children }: { children?: ReactNode }) => {
         <div className="flex items-center">
           {resume.avatar && (
             <div
-              className="shrink-0 overflow-hidden rounded-[0.618em]"
+              className="shrink-0 overflow-hidden rounded-phi"
               style={{ width: avatarSize, height: avatarSize }}
             >
               <AvatarImage
@@ -48,11 +48,10 @@ export const Header = ({ children }: { children?: ReactNode }) => {
               />
             </div>
           )}
-          <div className="flex flex-col ml-[1em]">
+          <div className="flex flex-col ml-phi">
             <h1
-              className="font-heading font-bold text-teal-5 cursor-default hover:text-teal-3 transition-colors"
+              className="font-heading font-bold text-accent small-caps"
               style={{
-                fontVariant: 'all-small-caps',
                 fontSize: `calc(2.25rem - var(--progress) * 0.5rem)`,
                 lineHeight: 1.1,
               }}
@@ -68,14 +67,12 @@ export const Header = ({ children }: { children?: ReactNode }) => {
               }}
             >
               {resume.nationality && (
-                <span className="text-xs text-gray-6 block">
+                <span className="text-muted-xs block">
                   Nationality: {resume.nationality}
                 </span>
               )}
               {resume.yob && (
-                <span className="text-xs text-gray-6 block">
-                  YoB: {resume.yob}
-                </span>
+                <span className="text-muted-xs block">YoB: {resume.yob}</span>
               )}
             </div>
           </div>
