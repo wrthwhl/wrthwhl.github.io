@@ -1,6 +1,5 @@
 import { useMDXComponent } from 'next-contentlayer2/hooks';
 import { allResumes, Resume } from '@wrthwhl/content';
-import { Button } from '../components/ui/Button';
 import { GoldenPageLayout } from '../components/ui/GoldenPageLayout';
 import {
   ResumeContext,
@@ -16,7 +15,6 @@ import {
 
 // MDX component mapping - only semantic components exposed
 const mdxComponents = {
-  Header,
   Summary,
   Section,
   Job: Timeline.Item,
@@ -29,22 +27,15 @@ const mdxComponents = {
 
 export function Index({ doc }: { doc: Resume }) {
   const MdxContent = useMDXComponent(doc.body.code);
-  const handlePrint = () => {
-    if (typeof window !== 'undefined') window.print();
-  };
 
   return (
     <ResumeContext.Provider value={doc}>
       <GoldenPageLayout>
-        <div className="max-w-[80ch] mx-auto mt-[1.618em] pb-[1.618em] relative">
-          <Button
-            variant="outline"
-            onClick={handlePrint}
-            className="absolute right-0 no-print"
-          >
-            Print
-          </Button>
-          <MdxContent components={mdxComponents} />
+        <div className="max-w-[80ch] mx-auto pb-[1.618em]">
+          <Header />
+          <div className="px-4">
+            <MdxContent components={mdxComponents} />
+          </div>
         </div>
       </GoldenPageLayout>
     </ResumeContext.Provider>
