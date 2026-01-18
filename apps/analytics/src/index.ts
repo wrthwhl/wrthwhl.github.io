@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import auth from './auth';
 
 type Bindings = {
   DB: D1Database;
@@ -7,15 +8,23 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-// CORS for cross-origin requests from resume site
+// CORS for cross-origin requests from resume site and analytics dashboard
 app.use(
   '/api/*',
   cors({
-    origin: ['https://marco.wrthwhl.cloud', 'http://localhost:3000'],
-    allowMethods: ['POST', 'OPTIONS'],
+    origin: [
+      'https://marco.wrthwhl.cloud',
+      'https://analytics.wrthwhl.cloud',
+      'http://localhost:3000',
+    ],
+    allowMethods: ['GET', 'POST', 'OPTIONS'],
     allowHeaders: ['Content-Type'],
+    credentials: true,
   }),
 );
+
+// Mount auth routes
+app.route('/api/auth', auth);
 
 // Health check
 app.get('/', (c) => c.json({ status: 'ok', service: 'wrthwhl-analytics' }));

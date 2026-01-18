@@ -184,11 +184,20 @@ CREATE TABLE sessions (
 
 ### Phase 2: Auth
 
-- [ ] Install WebAuthn dependencies (`@simplewebauthn/*`)
-- [ ] Implement passkey registration (one-time setup token)
-- [ ] Implement passkey login
-- [ ] Session management (cookies)
-- [ ] Protect dashboard routes with middleware
+- [x] Install WebAuthn dependencies (`@simplewebauthn/server`) - 2026-01-18
+- [x] Implement passkey registration - 2026-01-18
+- [x] Implement passkey login - 2026-01-18
+- [x] Session management (cookies, 30-day duration) - 2026-01-18
+- [x] Add requireAuth middleware for protected routes - 2026-01-18
+- [x] Simplify to solo mode (first-come-first-served, then session-gated) - 2026-01-18
+- [ ] Test auth flow end-to-end
+
+#### Access Model (Solo Mode)
+
+- First registration open (no credentials exist → anyone can register)
+- After first registration, adding passkeys requires active session
+- Single user with multiple backup passkeys supported
+- Future: invite codes for multi-user if needed
 
 ### Phase 3: Dashboard (Tables)
 
