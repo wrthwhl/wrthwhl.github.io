@@ -32,6 +32,13 @@ When work is ready:
 - Don't modify auto-generated files (e.g., `next-env.d.ts`)
 - SSH_AUTH_SOCK is configured for the macOS system agent (Proton Pass keys loaded via `pass-cli ssh-agent load`)
 
+## Git Hygiene
+
+- **Keep history linear:** Always rebase onto main before creating PRs; avoid merge commits
+- **No force pushes without approval:** Never `git push --force` without explicit user consent
+- **After PR merges:** If continuing work, checkout main, pull, and create a fresh branch - don't continue on the old branch
+- **Squash merges:** PRs are squash-merged, so old branches become stale after merge
+
 ## Pre-Commit Checklist
 
 Before committing, verify:
