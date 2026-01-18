@@ -35,7 +35,7 @@ export const Header = ({ qrCode }: { qrCode?: QRCodeData }) => {
           // Use color-mix for smooth background transition: page -> contrast
           backgroundColor: `color-mix(in srgb, var(--theme-bg-page), var(--theme-bg-contrast) calc(var(--progress) * 100%))`,
           paddingTop: `calc(1.618em - var(--progress) * 1em)`,
-          paddingBottom: `calc(1em - var(--progress) * 0.618em)`,
+          paddingBottom: `calc(1.618em - var(--progress) * 1em)`,
         } as React.CSSProperties
       }
     >
