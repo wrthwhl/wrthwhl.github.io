@@ -2,12 +2,14 @@ import { Head, Html, Main, NextScript } from 'next/document';
 
 // Blocking script to prevent theme flicker
 // Runs before page renders to set the correct theme class
+// Uses Radix Colors convention: .dark / .light classes
 const themeScript = `
   (function() {
     var theme = localStorage.getItem('theme');
-    if (theme === 'light' || (!theme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-      document.documentElement.classList.add('light');
+    if (!theme) {
+      theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     }
+    document.documentElement.classList.add(theme);
   })();
 `;
 

@@ -1,9 +1,10 @@
 'use client';
 
-import { ReactNode } from 'react';
+import type { QRCodeData } from '../../lib/qrcode';
 import { AvatarImage } from '../ui/Avatar';
 import { Button } from '../ui/Button';
 import { ThemeSwitcher } from '../ui/ThemeSwitcher';
+import { QRCode } from '../ui/QRCode';
 import { useResume } from './Context';
 import { useScrollProgress } from '../../lib/useScrollProgress';
 import { cn } from '../../lib/utils';
@@ -13,13 +14,7 @@ const SCROLL_THRESHOLD = 80;
 const AVATAR_SIZE = 80;
 const AVATAR_MIN_SCALE = 0.618;
 
-export const Header = ({
-  children,
-  qrCode,
-}: {
-  children?: ReactNode;
-  qrCode?: string;
-}) => {
+export const Header = ({ qrCode }: { qrCode?: QRCodeData }) => {
   const resume = useResume();
   const progress = useScrollProgress(SCROLL_THRESHOLD);
 
@@ -29,7 +24,10 @@ export const Header = ({
 
   return (
     <div
-      className={cn('sticky top-0 z-50 px-4', progress > 0.2 && 'shadow-md')}
+      className={cn(
+        'sticky top-0 z-50 px-4 print:static',
+        progress > 0.2 && 'shadow-md',
+      )}
       style={
         {
           // Set CSS custom property for scroll progress
@@ -93,12 +91,7 @@ export const Header = ({
           >
             Print
           </Button>
-          {qrCode && (
-            <div
-              className="hidden print:block"
-              dangerouslySetInnerHTML={{ __html: qrCode }}
-            />
-          )}
+          {qrCode && <QRCode data={qrCode} />}
         </div>
       </div>
     </div>

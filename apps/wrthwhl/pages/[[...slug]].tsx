@@ -11,7 +11,7 @@ import {
   SkillCategory,
   Contact,
 } from '../components/resume';
-import { generateQRCode } from '../lib/qrcode';
+import { generateQRCode, QRCodeData } from '../lib/qrcode';
 
 // MDX component mapping - only semantic components exposed
 const mdxComponents = {
@@ -24,7 +24,7 @@ const mdxComponents = {
   Contact,
 };
 
-export function Index({ doc, qrCode }: { doc: Resume; qrCode: string }) {
+export function Index({ doc, qrCode }: { doc: Resume; qrCode: QRCodeData }) {
   const MdxContent = useMDXComponent(doc.body.code);
 
   return (

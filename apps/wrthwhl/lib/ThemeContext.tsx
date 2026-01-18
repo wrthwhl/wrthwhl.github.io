@@ -35,16 +35,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setMounted(true);
   }, []);
 
-  // Apply theme class to document
+  // Apply theme class to document (Radix Colors convention)
   useEffect(() => {
     if (!mounted) return;
 
     const root = document.documentElement;
-    if (theme === 'light') {
-      root.classList.add('light');
-    } else {
-      root.classList.remove('light');
-    }
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
   }, [theme, mounted]);
 
   const setTheme = (newTheme: Theme) => {

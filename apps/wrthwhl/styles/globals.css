@@ -1,6 +1,29 @@
 @import 'tailwindcss';
 
-/* Custom theme colors matching original Mantine theme */
+/* Radix Colors - teal for accent, sage for gray (tinted to complement teal) */
+@import '@radix-ui/colors/teal.css';
+@import '@radix-ui/colors/teal-dark.css';
+@import '@radix-ui/colors/teal-alpha.css';
+@import '@radix-ui/colors/teal-dark-alpha.css';
+@import '@radix-ui/colors/sage.css';
+@import '@radix-ui/colors/sage-dark.css';
+@import '@radix-ui/colors/sage-alpha.css';
+@import '@radix-ui/colors/sage-dark-alpha.css';
+
+/*
+ * Theme System based on Radix Colors
+ *
+ * 12-step scale with semantic purposes:
+ * 1-2:   Backgrounds (app, subtle)
+ * 3-5:   Interactive components (normal, hover, active)
+ * 6-8:   Borders and separators
+ * 9-10:  Solid colors (primary)
+ * 11-12: Text (low-contrast, high-contrast)
+ *
+ * Dark theme is default. Light theme activated with .light class.
+ * Radix Colors handles the color values automatically per theme.
+ */
+
 @theme {
   /* Golden ratio spacing scale (phi = 1.618) */
   --spacing-phi-xs: 0.236em;
@@ -14,54 +37,6 @@
   /* Golden ratio border radius */
   --radius-phi: 0.618em;
 
-  /* Dark colors (from Mantine dark palette) */
-  --color-dark-0: #717d79;
-  --color-dark-1: #63706b;
-  --color-dark-2: #5b625f;
-  --color-dark-3: #444947;
-  --color-dark-4: #373b39;
-  --color-dark-5: #2e3130;
-  --color-dark-6: #272a29;
-  --color-dark-7: #202221;
-  --color-dark-8: #171918;
-  --color-dark-9: #101211;
-
-  /* Teal from original theme */
-  --color-teal-0: #e0f8f3;
-  --color-teal-1: #ccf3ea;
-  --color-teal-2: #b8eae0;
-  --color-teal-3: #a1ded2;
-  --color-teal-4: #83cdc1;
-  --color-teal-5: #53b9ab;
-  --color-teal-6: #12a594;
-  --color-teal-7: #0d9b8a;
-  --color-teal-8: #008573;
-  --color-teal-9: #0d3d38;
-
-  /* Orange accent color */
-  --color-orange-0: #fff4e6;
-  --color-orange-1: #ffe8cc;
-  --color-orange-2: #ffd8a8;
-  --color-orange-3: #ffc078;
-  --color-orange-4: #ffa94d;
-  --color-orange-5: #ff922b;
-  --color-orange-6: #fd7e14;
-  --color-orange-7: #e8590c;
-  --color-orange-8: #d9480f;
-  --color-orange-9: #bf4000;
-
-  /* Gray for text (light to dark: 0-9) */
-  --color-gray-0: #f8f9fa;
-  --color-gray-1: #f1f3f5;
-  --color-gray-2: #e9ecef;
-  --color-gray-3: #dee2e6;
-  --color-gray-4: #ced4da;
-  --color-gray-5: #adb5bd;
-  --color-gray-6: #868e96;
-  --color-gray-7: #495057;
-  --color-gray-8: #343a40;
-  --color-gray-9: #212529;
-
   /* Font families */
   --font-heading: 'Kufam', sans-serif;
   --font-mono:
@@ -69,86 +44,125 @@
 }
 
 /*
- * Accent color configuration
- * Change this ONE value to switch the entire accent color scheme.
- * Hover and print variants are automatically derived using color-mix().
+ * Semantic tokens - alias Radix color scales to semantic names
+ * To change accent color, swap --teal-* for another Radix scale (e.g., --blue-*)
  */
 :root {
-  --color-accent-base: var(--color-teal-5);
+  /* Accent semantic tokens */
+  --accent-1: var(--teal-1);
+  --accent-2: var(--teal-2);
+  --accent-3: var(--teal-3);
+  --accent-4: var(--teal-4);
+  --accent-5: var(--teal-5);
+  --accent-6: var(--teal-6);
+  --accent-7: var(--teal-7);
+  --accent-8: var(--teal-8);
+  --accent-9: var(--teal-9);
+  --accent-10: var(--teal-10);
+  --accent-11: var(--teal-11);
+  --accent-12: var(--teal-12);
 
-  /* Derived accent variants */
-  --color-accent: var(--color-accent-base);
-  --color-accent-hover: color-mix(in srgb, var(--color-accent-base), white 40%);
-  --color-accent-print: color-mix(in srgb, var(--color-accent-base), black 30%);
+  /* Accent alpha tokens */
+  --accent-a1: var(--teal-a1);
+  --accent-a2: var(--teal-a2);
+  --accent-a3: var(--teal-a3);
+  --accent-a4: var(--teal-a4);
+  --accent-a5: var(--teal-a5);
+  --accent-a6: var(--teal-a6);
+  --accent-a7: var(--teal-a7);
+  --accent-a8: var(--teal-a8);
+  --accent-a9: var(--teal-a9);
+  --accent-a10: var(--teal-a10);
+  --accent-a11: var(--teal-a11);
+  --accent-a12: var(--teal-a12);
+
+  /* Accent functional tokens */
+  --accent-surface: var(--teal-a2);
+  --accent-indicator: var(--teal-9);
+  --accent-track: var(--teal-9);
+  --accent-contrast: white;
+
+  /* Gray semantic tokens (using sage - tinted gray that complements teal) */
+  --gray-1: var(--sage-1);
+  --gray-2: var(--sage-2);
+  --gray-3: var(--sage-3);
+  --gray-4: var(--sage-4);
+  --gray-5: var(--sage-5);
+  --gray-6: var(--sage-6);
+  --gray-7: var(--sage-7);
+  --gray-8: var(--sage-8);
+  --gray-9: var(--sage-9);
+  --gray-10: var(--sage-10);
+  --gray-11: var(--sage-11);
+  --gray-12: var(--sage-12);
+
+  /* Gray alpha tokens */
+  --gray-a1: var(--sage-a1);
+  --gray-a2: var(--sage-a2);
+  --gray-a3: var(--sage-a3);
+  --gray-a4: var(--sage-a4);
+  --gray-a5: var(--sage-a5);
+  --gray-a6: var(--sage-a6);
+  --gray-a7: var(--sage-a7);
+  --gray-a8: var(--sage-a8);
+  --gray-a9: var(--sage-a9);
+  --gray-a10: var(--sage-a10);
+  --gray-a11: var(--sage-a11);
+  --gray-a12: var(--sage-a12);
+
+  /* Background tokens */
+  --color-background: var(--gray-1);
+  --color-panel-solid: var(--gray-2);
+  --color-panel-translucent: var(--gray-a2);
+  --color-surface: var(--gray-a3);
+  --color-overlay: rgba(0, 0, 0, 0.7);
+}
+
+.light {
+  --color-overlay: rgba(0, 0, 0, 0.4);
+  --accent-contrast: var(--teal-1);
 }
 
 /*
- * Theme configuration
- * Semantic color tokens that change based on theme.
- * Dark theme is the default.
+ * Legacy compatibility layer
+ * Maps old token names to new system
  */
 :root {
-  /* Page colors */
-  --theme-bg-page: var(--color-dark-8);
-  --theme-bg-surface: var(--color-dark-6);
-  --theme-bg-elevated: var(--color-dark-7);
-  --theme-bg-contrast: var(--color-dark-9);
+  /* Background tokens */
+  --theme-bg-page: var(--color-background);
+  --theme-bg-surface: var(--gray-3);
+  --theme-bg-elevated: var(--gray-2);
+  --theme-bg-contrast: var(--gray-4);
 
-  /* Text colors */
-  --theme-text-primary: var(--color-gray-2);
-  --theme-text-body: var(--color-gray-2);
-  --theme-text-description: var(--color-gray-4);
-  --theme-text-muted: var(--color-gray-6);
-  --theme-text-tertiary: var(--color-gray-7);
+  /* Text tokens */
+  --theme-text-primary: var(--gray-12);
+  --theme-text-body: var(--gray-12);
+  --theme-text-description: var(--gray-11);
+  --theme-text-muted: var(--gray-10);
+  --theme-text-tertiary: var(--gray-9);
 
-  /* Border colors */
-  --theme-border-subtle: var(--color-dark-4);
-  --theme-border-muted: var(--color-gray-8);
+  /* Border tokens */
+  --theme-border-subtle: var(--gray-6);
+  --theme-border-muted: var(--gray-7);
 
-  /* Button colors */
-  --theme-btn-ghost-text: var(--color-dark-0);
-  --theme-btn-ghost-hover-bg: var(--color-dark-6);
-  --theme-btn-ghost-hover-text: var(--color-gray-2);
-  --theme-btn-outline-hover-bg: var(--color-dark-7);
-  --theme-btn-primary-text: var(--color-dark-9);
-}
+  /* Button tokens */
+  --theme-btn-ghost-text: var(--gray-11);
+  --theme-btn-ghost-hover-bg: var(--gray-a3);
+  --theme-btn-ghost-hover-text: var(--gray-12);
+  --theme-btn-outline-hover-bg: var(--accent-a3);
+  --theme-btn-primary-text: var(--accent-contrast);
 
-/* Light theme overrides */
-:root.light {
-  /* Page colors */
-  --theme-bg-page: var(--color-gray-2);
-  --theme-bg-surface: var(--color-gray-1);
-  --theme-bg-elevated: var(--color-gray-3);
-  --theme-bg-contrast: var(--color-gray-4);
-
-  /* Text colors */
-  --theme-text-primary: var(--color-gray-9);
-  --theme-text-body: var(--color-gray-8);
-  --theme-text-description: var(--color-gray-7);
-  --theme-text-muted: var(--color-gray-6);
-  --theme-text-tertiary: var(--color-gray-5);
-
-  /* Border colors */
-  --theme-border-subtle: var(--color-gray-3);
-  --theme-border-muted: var(--color-gray-4);
-
-  /* Button colors */
-  --theme-btn-ghost-text: var(--color-gray-8);
-  --theme-btn-ghost-hover-bg: var(--color-gray-2);
-  --theme-btn-ghost-hover-text: var(--color-gray-9);
-  --theme-btn-outline-hover-bg: var(--color-gray-1);
-  --theme-btn-primary-text: var(--color-gray-0);
-
-  /* Adjust accent for light mode (darker for better contrast) */
-  --color-accent: var(--color-teal-6);
-  --color-accent-hover: var(--color-teal-7);
+  /* Accent shorthand (legacy) */
+  --color-accent: var(--accent-9);
+  --color-accent-hover: var(--accent-10);
+  --color-accent-print: var(--accent-11);
 }
 
 /* Base styles */
 @layer base {
   body {
-    background-color: var(--theme-bg-page);
-    color: var(--theme-text-body);
+    background-color: var(--color-background);
+    color: var(--gray-12);
     @apply antialiased;
   }
 }
@@ -156,22 +170,22 @@
 /* Component styles */
 @layer components {
   .summary-text strong {
-    color: var(--color-accent);
+    color: var(--accent-11);
     font-weight: 900;
     font-size: 1.125rem;
     transition: color 0.15s;
   }
   .summary-text strong:hover {
-    color: var(--color-accent-hover);
+    color: var(--accent-12);
   }
   .summary-text em {
-    color: var(--color-accent);
+    color: var(--accent-11);
     font-style: normal;
     font-weight: 600;
     transition: color 0.15s;
   }
   .summary-text em:hover {
-    color: var(--color-accent-hover);
+    color: var(--accent-12);
   }
 }
 
@@ -194,45 +208,47 @@
   }
 }
 
-/* Print styles */
+/* Print styles - force light theme for paper */
 @media print {
+  :root {
+    /* Force light theme colors for print */
+    --teal-1: #fafefd;
+    --teal-2: #f1fcfa;
+    --teal-3: #e7f9f5;
+    --teal-4: #d9f3ee;
+    --teal-5: #c7ebe5;
+    --teal-6: #afdfd7;
+    --teal-7: #8dcec3;
+    --teal-8: #53b9ab;
+    --teal-9: #12a594;
+    --teal-10: #0e9888;
+    --teal-11: #067a6f;
+    --teal-12: #10302b;
+
+    --sage-1: #fbfdfc;
+    --sage-2: #f7f9f8;
+    --sage-3: #eef1f0;
+    --sage-4: #e6e9e8;
+    --sage-5: #dfe2e0;
+    --sage-6: #d7dad9;
+    --sage-7: #cbcfcd;
+    --sage-8: #b8bcba;
+    --sage-9: #868e8b;
+    --sage-10: #7c8481;
+    --sage-11: #5f6563;
+    --sage-12: #1a211e;
+  }
+
   .no-print {
     display: none !important;
   }
 
+  .qr-code {
+    color: var(--accent-10);
+  }
+
   body {
     background: transparent !important;
-    color: var(--color-gray-9) !important;
-  }
-
-  /* Darker accent for print */
-  .text-accent,
-  .icon-link,
-  .summary-text strong,
-  .summary-text em {
-    color: var(--color-accent-print) !important;
-    font-style: normal !important;
-  }
-
-  /* Darker grays for print - semantic classes */
-  .text-body {
-    color: var(--color-gray-7) !important;
-  }
-
-  .text-description {
-    color: var(--color-gray-8) !important;
-  }
-
-  .text-muted,
-  .text-muted-sm,
-  .text-muted-xs {
-    color: var(--color-gray-7) !important;
-  }
-
-  /* Print border colors */
-  .border-subtle,
-  .border-muted {
-    border-color: var(--color-gray-6) !important;
   }
 }
 
@@ -240,108 +256,108 @@
   margin: 0.5cm 1.5cm;
 }
 
-/* Utility classes for repeated patterns */
+/* Utility classes */
 @layer utilities {
   /* Semantic text colors */
   .text-body {
-    color: var(--theme-text-body);
+    color: var(--gray-12);
   }
   .text-description {
-    color: var(--theme-text-description);
+    color: var(--gray-11);
   }
 
   /* Interactive accent text */
   .text-accent {
-    color: var(--color-accent);
+    color: var(--accent-11);
     cursor: default;
     transition: color 0.15s;
   }
   .text-accent:hover {
-    color: var(--color-accent-hover);
+    color: var(--accent-12);
   }
 
-  /* Icon link style (slightly different hover) */
+  /* Icon link style */
   .icon-link {
-    color: var(--color-accent);
+    color: var(--accent-11);
     transition: color 0.15s;
   }
   .icon-link:hover {
-    color: var(--color-accent-hover);
+    color: var(--accent-12);
   }
 
   /* Muted text variants */
   .text-muted {
-    color: var(--theme-text-muted);
+    color: var(--gray-11);
   }
   .text-muted-sm {
-    color: var(--theme-text-muted);
+    color: var(--gray-11);
     font-size: 0.875rem;
   }
   .text-muted-xs {
-    color: var(--theme-text-muted);
+    color: var(--gray-11);
     font-size: 0.75rem;
   }
 
   /* Tertiary text (dates, etc.) */
   .text-tertiary {
-    color: var(--theme-text-tertiary);
+    color: var(--gray-9);
   }
 
   /* Semantic background colors */
   .bg-surface {
-    background-color: var(--theme-bg-surface);
+    background-color: var(--color-surface);
   }
   .bg-page {
-    background-color: var(--theme-bg-page);
+    background-color: var(--color-background);
   }
   .bg-elevated {
-    background-color: var(--theme-bg-elevated);
+    background-color: var(--gray-2);
   }
   .bg-contrast {
-    background-color: var(--theme-bg-contrast);
+    background-color: var(--gray-4);
   }
 
   /* Semantic border colors */
   .border-subtle {
-    border-color: var(--theme-border-subtle);
+    border-color: var(--gray-6);
   }
   .border-muted {
-    border-color: var(--theme-border-muted);
+    border-color: var(--gray-7);
   }
 
   /* Button semantic colors */
   .btn-primary {
-    background-color: var(--color-accent);
-    color: var(--theme-btn-primary-text);
+    background-color: var(--accent-9);
+    color: var(--accent-contrast);
     transition: background-color 0.15s;
   }
   .btn-primary:hover {
-    background-color: var(--color-accent-hover);
+    background-color: var(--accent-10);
   }
   .btn-outline {
-    border: 1px solid var(--color-accent);
+    border: 1px solid var(--accent-7);
     background-color: transparent;
-    color: var(--color-accent);
+    color: var(--accent-11);
     transition:
       background-color 0.15s,
       color 0.15s;
   }
   .btn-outline:hover {
-    background-color: var(--theme-btn-outline-hover-bg);
-    color: var(--color-accent-hover);
+    background-color: var(--accent-a3);
+    color: var(--accent-12);
   }
   .btn-ghost {
-    color: var(--theme-btn-ghost-text);
+    color: var(--gray-11);
     transition:
       background-color 0.15s,
       color 0.15s;
   }
   .btn-ghost:hover {
-    background-color: var(--theme-btn-ghost-hover-bg);
-    color: var(--theme-btn-ghost-hover-text);
+    background-color: var(--gray-a3);
+    color: var(--gray-12);
   }
   .btn-link {
-    color: var(--color-accent);
+    color: var(--accent-11);
     text-underline-offset: 4px;
   }
   .btn-link:hover {

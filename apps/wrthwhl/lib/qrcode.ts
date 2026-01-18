@@ -1,18 +1,25 @@
 import QRCode from 'qrcode';
 
+export interface QRCodeData {
+  path: string;
+  viewBox: string;
+  size: number;
+}
+
 /**
- * Generates a QR code SVG string for the given URL.
- * Used at build time to embed QR code in the page.
+ * Generates QR code data for the given URL.
+ * Used at build time, rendered by QRCode component.
  */
-export async function generateQRCode(url: string): Promise<string> {
+export async function generateQRCode(url: string): Promise<QRCodeData> {
+  const size = 64;
   const svg = await QRCode.toString(url, {
     type: 'svg',
     margin: 0,
-    width: 64,
-    color: {
-      dark: '#5eead4', // teal-5
-      light: '#00000000', // transparent
-    },
+    width: size,
   });
-  return svg;
+
+  const viewBox = svg.match(/viewBox="([^"]+)"/)?.[1] || '0 0 29 29';
+  const path = svg.match(/stroke="#000000" d="([^"]+)"/)?.[1] || '';
+
+  return { path, viewBox, size };
 }
