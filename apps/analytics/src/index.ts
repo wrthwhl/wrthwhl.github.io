@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import { html } from 'hono/html';
+import { html, raw } from 'hono/html';
 import auth from './auth';
 
 type Bindings = {
@@ -115,7 +115,7 @@ const pageLayout = (title: string, content: string) => html`
       </style>
     </head>
     <body>
-      <div class="container">${content}</div>
+      <div class="container">${raw(content)}</div>
     </body>
   </html>
 `;
