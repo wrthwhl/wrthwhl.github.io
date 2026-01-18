@@ -50,3 +50,6 @@ Thumbs.db
 
 # Cover letters (private)
 /letters
+
+# Auto-generated Next.js file
+next-env.d.ts
