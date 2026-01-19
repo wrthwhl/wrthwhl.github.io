@@ -227,17 +227,18 @@ CREATE TABLE sessions (
 - [x] Cross-subdomain auth (cookie domain, WebAuthn rpID) - 2026-01-19
 - [x] Auth guard for protected pages (useAuth hook) - 2026-01-19
 - [x] Deploy console to Cloudflare Pages (console.wrthwhl.cloud) - 2026-01-19
-- [ ] Build Stats API endpoints:
-  - `GET /api/stats/overview` - totals, top referrers (last 7d default)
+- [x] Build Stats API endpoints - 2026-01-19:
+  - `GET /api/stats/overview` - totals, top referrer, views by day
   - `GET /api/stats/referrers` - referrer breakdown with counts
-  - `GET /api/stats/utm` - UTM parameter breakdown
+  - `GET /api/stats/utm` - UTM sources, mediums, campaigns
+  - `GET /api/stats/pages` - page path breakdown
+  - `GET /api/stats/devices` - device types, browsers, countries
   - All protected via `requireAuth`, support `?from=&to=` params
-- [ ] Build Dashboard UI (shadcn):
-  - Date range picker (7d default, 30d, custom)
-  - Overview stats cards
+- [x] Build Dashboard UI - 2026-01-19:
+  - Date range picker (7d, 30d, 90d presets)
+  - Overview stats cards (views, sessions, top referrer)
   - Referrers table
   - UTM breakdown table
-- [ ] Build Dashboard UI (integrate with Stats API)
 
 ### Phase 4: Enhanced Tracking
 
