@@ -43,6 +43,16 @@
           "dev": false
         }
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "commands": [
+          "wrangler pages deploy dist/apps/console/.next --project-name=wrthwhl-console"
+        ],
+        "cwd": "."
+      }
     }
   }
 }
