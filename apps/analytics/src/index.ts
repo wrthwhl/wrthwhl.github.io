@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import auth from './auth';
+import stats from './stats';
 
 type Bindings = {
   DB: D1Database;
@@ -26,6 +27,9 @@ app.use(
 
 // Mount auth routes
 app.route('/api/auth', auth);
+
+// Mount stats routes
+app.route('/api/stats', stats);
 
 // Health check
 app.get('/', (c) => c.json({ status: 'ok', service: 'wrthwhl-analytics' }));
