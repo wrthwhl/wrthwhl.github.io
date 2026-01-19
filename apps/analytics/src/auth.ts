@@ -23,8 +23,16 @@ const auth = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 
 // WebAuthn config
 const rpName = 'wrthwhl Analytics';
-const rpID = 'analytics.wrthwhl.cloud';
-const origin = `https://${rpID}`;
+const rpID = 'wrthwhl.cloud';
+// Accept origins from any subdomain
+const allowedOrigins = [
+  'https://console.wrthwhl.cloud',
+  'https://analytics.wrthwhl.cloud',
+  'http://localhost:3001',
+];
+
+// Cookie domain for cross-subdomain auth (analytics + console)
+const COOKIE_DOMAIN = '.wrthwhl.cloud';
 
 // Session duration: 30 days
 const SESSION_DURATION_MS = 30 * 24 * 60 * 60 * 1000;
@@ -151,7 +159,7 @@ auth.post('/register/verify', async (c) => {
     const verification = await verifyRegistrationResponse({
       response,
       expectedChallenge,
-      expectedOrigin: origin,
+      expectedOrigin: allowedOrigins,
       expectedRPID: rpID,
     });
 
@@ -190,11 +198,12 @@ auth.post('/register/verify', async (c) => {
       .bind(sessionId, credential.id, expiresAt)
       .run();
 
-    // Set session cookie
+    // Set session cookie (shared across subdomains)
     setCookie(c, 'session', sessionId, {
       httpOnly: true,
       secure: true,
-      sameSite: 'Strict',
+      sameSite: 'None',
+      domain: COOKIE_DOMAIN,
       path: '/',
       maxAge: SESSION_DURATION_MS / 1000,
     });
@@ -274,7 +283,7 @@ auth.post('/login/verify', async (c) => {
     const verification = await verifyAuthenticationResponse({
       response,
       expectedChallenge,
-      expectedOrigin: origin,
+      expectedOrigin: allowedOrigins,
       expectedRPID: rpID,
       credential: {
         id: credential.id,
@@ -305,11 +314,12 @@ auth.post('/login/verify', async (c) => {
       .bind(sessionId, credentialId, expiresAt)
       .run();
 
-    // Set session cookie
+    // Set session cookie (shared across subdomains)
     setCookie(c, 'session', sessionId, {
       httpOnly: true,
       secure: true,
-      sameSite: 'Strict',
+      sameSite: 'None',
+      domain: COOKIE_DOMAIN,
       path: '/',
       maxAge: SESSION_DURATION_MS / 1000,
     });
@@ -339,7 +349,7 @@ auth.get('/session', async (c) => {
     .first();
 
   if (!session) {
-    deleteCookie(c, 'session');
+    deleteCookie(c, 'session', { domain: COOKIE_DOMAIN, path: '/' });
     return c.json({ authenticated: false });
   }
 
@@ -353,7 +363,7 @@ auth.post('/logout', async (c) => {
     await c.env.DB.prepare('DELETE FROM sessions WHERE id = ?')
       .bind(sessionId)
       .run();
-    deleteCookie(c, 'session');
+    deleteCookie(c, 'session', { domain: COOKIE_DOMAIN, path: '/' });
   }
   return c.json({ ok: true });
 });

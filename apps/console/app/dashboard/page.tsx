@@ -1,6 +1,25 @@
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@wrthwhl/ui';
+import { useAuth } from '../../lib/useAuth';
 
 export default function DashboardPage() {
+  const { isLoading, isAuthenticated } = useAuth();
+
+  // Show loading state while checking auth
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-[hsl(var(--muted-foreground))]">Loading...</p>
+      </div>
+    );
+  }
+
+  // Don't render if not authenticated (redirect will happen)
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return (
     <div className="container mx-auto p-[var(--spacing-phi-lg)]">
       <h1 className="text-2xl font-bold mb-[var(--spacing-phi-lg)]">

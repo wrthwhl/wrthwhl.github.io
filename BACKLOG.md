@@ -217,13 +217,16 @@ CREATE TABLE sessions (
 **Architecture:**
 
 - `apps/console/` - Next.js app with shadcn for Dashboard UI
-- `apps/analytics/` - Cloudflare Worker as REST API only (remove HTML rendering)
+- `apps/analytics/` - Cloudflare Worker as REST API only
 
 **Tasks:**
 
-- [ ] Create `apps/console` Next.js app with shadcn
-- [ ] Move /login, /register pages from Worker to console
-- [ ] Strip Worker down to API only
+- [x] Create `apps/console` Next.js app with shadcn - 2026-01-19
+- [x] Move /login, /register pages from Worker to console - 2026-01-19
+- [x] Strip Worker down to API only - 2026-01-19
+- [x] Cross-subdomain auth (cookie domain, WebAuthn rpID) - 2026-01-19
+- [x] Auth guard for protected pages (useAuth hook) - 2026-01-19
+- [x] Deploy console to Cloudflare Pages (console.wrthwhl.cloud) - 2026-01-19
 - [ ] Build Stats API endpoints:
   - `GET /api/stats/overview` - totals, top referrers (last 7d default)
   - `GET /api/stats/referrers` - referrer breakdown with counts
@@ -234,7 +237,7 @@ CREATE TABLE sessions (
   - Overview stats cards
   - Referrers table
   - UTM breakdown table
-- [ ] Deploy console to Cloudflare Pages (console.wrthwhl.cloud)
+- [ ] Build Dashboard UI (integrate with Stats API)
 
 ### Phase 4: Enhanced Tracking
 
