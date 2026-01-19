@@ -23,8 +23,21 @@ const auth = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 
 // WebAuthn config
 const rpName = 'wrthwhl Analytics';
-const rpID = 'analytics.wrthwhl.cloud';
-const origin = `https://${rpID}`;
+
+// Dynamic rpID based on request origin for local development
+function getRpConfig(requestOrigin: string | null) {
+  if (requestOrigin?.includes('localhost')) {
+    const url = new URL(requestOrigin);
+    return {
+      rpID: 'localhost',
+      origin: requestOrigin,
+    };
+  }
+  return {
+    rpID: 'analytics.wrthwhl.cloud',
+    origin: 'https://analytics.wrthwhl.cloud',
+  };
+}
 
 // Session duration: 30 days
 const SESSION_DURATION_MS = 30 * 24 * 60 * 60 * 1000;
@@ -116,6 +129,8 @@ auth.post('/register/options', async (c) => {
   // Generate a user ID (for first registration, create new; otherwise use existing)
   const userId = generateId();
 
+  const { rpID } = getRpConfig(c.req.header('origin') || null);
+
   const options = await generateRegistrationOptions({
     rpName,
     rpID,
@@ -146,6 +161,8 @@ auth.post('/register/verify', async (c) => {
   if (!expectedChallenge) {
     return c.json({ error: 'Challenge not found or expired' }, 400);
   }
+
+  const { rpID, origin } = getRpConfig(c.req.header('origin') || null);
 
   try {
     const verification = await verifyRegistrationResponse({
@@ -225,6 +242,8 @@ auth.post('/login/options', async (c) => {
     return c.json({ error: 'No registered credentials' }, 400);
   }
 
+  const { rpID } = getRpConfig(c.req.header('origin') || null);
+
   // Use discoverable credentials (passkeys) - don't pass allowCredentials.
   // This lets authenticators like Proton Pass offer all passkeys for this domain,
   // rather than requiring a specific credential ID match.
@@ -269,6 +288,8 @@ auth.post('/login/verify', async (c) => {
   if (!credential) {
     return c.json({ error: 'Credential not found' }, 400);
   }
+
+  const { rpID, origin } = getRpConfig(c.req.header('origin') || null);
 
   try {
     const verification = await verifyAuthenticationResponse({
