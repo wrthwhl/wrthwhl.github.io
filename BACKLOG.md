@@ -2,7 +2,7 @@
 
 ## In Progress
 
-- [ ] Analytics microfrontend - Phase 3 (Dashboard) is next
+- [ ] Analytics microfrontend - Phase 4 (Enhanced Tracking) is next
 
 ## Features
 
@@ -212,28 +212,34 @@ CREATE TABLE sessions (
 - Credential IDs stored as Base64URLString (matching SimpleWebAuthn format)
 - Future: invite codes for multi-user if needed
 
-### Phase 3: Dashboard (Tables)
+### Phase 3: Dashboard (Tables) - Complete
 
 **Architecture:**
 
-- `apps/console/` - Next.js app with shadcn for Dashboard UI
-- `apps/analytics/` - Cloudflare Worker as REST API only (remove HTML rendering)
+- `apps/console/` - Next.js app with shared UI components for Dashboard
+- `apps/analytics/` - Cloudflare Worker as REST API only
+- `libs/ui/` - Shared UI components (Button, Card, Avatar, etc.)
+- `libs/theme/` - Shared design tokens (phi spacing, CSS variables)
 
 **Tasks:**
 
-- [ ] Create `apps/console` Next.js app with shadcn
-- [ ] Move /login, /register pages from Worker to console
-- [ ] Strip Worker down to API only
-- [ ] Build Stats API endpoints:
-  - `GET /api/stats/overview` - totals, top referrers (last 7d default)
+- [x] Create `apps/console` Next.js app - 2026-01-19
+- [x] Create `libs/ui` with shared components - 2026-01-19
+- [x] Create `libs/theme` with phi-based design tokens - 2026-01-19
+- [x] Move /login, /register pages from Worker to console - 2026-01-19
+- [x] Strip Worker down to API only - 2026-01-19
+- [x] Build Stats API endpoints - 2026-01-19:
+  - `GET /api/stats/overview` - totals, top referrers
   - `GET /api/stats/referrers` - referrer breakdown with counts
   - `GET /api/stats/utm` - UTM parameter breakdown
+  - `GET /api/stats/pages` - top pages by views
+  - `GET /api/stats/devices` - device/browser/country breakdown
   - All protected via `requireAuth`, support `?from=&to=` params
-- [ ] Build Dashboard UI (shadcn):
-  - Date range picker (7d default, 30d, custom)
+- [x] Build Dashboard UI - 2026-01-19:
+  - Date range selector (7d, 30d, 90d)
   - Overview stats cards
   - Referrers table
-  - UTM breakdown table
+  - UTM breakdown
 - [ ] Deploy console to Cloudflare Pages (console.wrthwhl.cloud)
 
 ### Phase 4: Enhanced Tracking
